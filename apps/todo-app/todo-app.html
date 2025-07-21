@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quest Diary | ToDo</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/icons/tab-icon.png" />
+    <link rel="stylesheet" href="assets/styles/reset.css" />
+    <link rel="stylesheet" href="assets/styles/todo-app.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <main class="todo-app">
+      <h1>Quest Diary | ToDo App</h1>
+
+      <div class="wrapper">
+        <form id="todo-form" aria-label="Add a new task">
+          <input
+            id="todo-input"
+            type="text"
+            placeholder="Write your task"
+            autocomplete="off"
+            required
+            aria-label="Task description"
+            maxlength="50"
+          />
+          <button id="add-button" type="submit">ADD</button>
+        </form>
+
+        <ul id="todo-list" aria-label="Task list"></ul>
+      </div>
+    </main>
+  </body>
+
+  <script src="assets/scripts/todo-app.js"></script>
+</html>

@@ -1,0 +1,230 @@
+:root {
+  --color-bg: #646464;
+  --color-surface: #1c1d20;
+  --color-surface-alt: #ffffff;
+  --color-accent: #f9f9f9;
+  --color-text: #f0ecec;
+  --color-muted: #a5a5a5;
+  --radius-pill: 1000px;
+  --radius-rounded: 15px;
+  --transition: 200ms ease;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+html {
+  font-family: "MedievalSharp", cursive;
+  font-size: 16px;
+  color: var(--color-text);
+  text-shadow: 1px 1px 2px black;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: url(../images/bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  backdrop-filter: blur(5px);
+  background-blend-mode: darken;
+
+  cursor: url("../icons/feather.svg"), auto;
+}
+
+h1 {
+  margin: 25px 0 20px;
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-text);
+}
+
+.todo-app {
+  margin: 5vh 10px;
+  padding: 50px;
+  width: 75%;
+  max-width: 600px;
+  min-height: 700px;
+  height: fit-content;
+
+  border: 1vmin solid;
+  border-image: conic-gradient(
+      from var(--angle),
+      #2e003e,
+      #5f0a87,
+      #a4508b,
+      #c084fc,
+      #a4508b,
+      #5f0a87,
+      #2e003e
+    )
+    1;
+
+  animation: 10s rotate linear infinite;
+
+  background-image: url(../images/single_page.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+form {
+  position: relative;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#todo-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+#todo-input {
+  box-sizing: border-box;
+  padding: 12px 20px;
+  width: 100%;
+  background: none;
+  border: 2px solid var(--color-surface-alt);
+  border-radius: var(--radius-pill);
+  font: inherit;
+  color: var(--color-text);
+  caret-color: var(--color-accent);
+  transition: var(--transition);
+}
+
+#todo-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+#add-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  height: 100%;
+  padding: 0 30px;
+  border: none;
+  border-radius: var(--radius-pill);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#add-button:hover {
+  filter: brightness(0.95);
+}
+
+.todo {
+  margin-bottom: 10px;
+  padding: 0 16px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-rounded);
+  display: flex;
+  align-items: center;
+}
+
+.todo .todo-text {
+  padding: 15px 0;
+  flex-grow: 1;
+  transition: var(--transition);
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox {
+  border: 2px solid var(--color-accent);
+  margin-right: 10px;
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox {
+  background-color: var(--color-accent);
+}
+
+input[type="checkbox"]:checked ~ .custom-checkbox svg {
+  fill: var(--color-surface);
+}
+
+input[type="checkbox"]:checked ~ .todo-text {
+  text-decoration: line-through;
+  color: var(--color-muted);
+}
+
+.delete-btn {
+  padding: 3px;
+  background: none;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.delete-btn svg {
+  transition: var(--transition);
+}
+
+.delete-btn:hover svg {
+  fill: red;
+}
+
+@media (max-width: 500px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    margin-top: 50px;
+    font-size: 15vw;
+  }
+
+  #add-button {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+    padding: 15px;
+    height: auto;
+  }
+
+  form {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
