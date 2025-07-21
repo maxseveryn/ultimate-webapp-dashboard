@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="assets/styles/reset.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles/calculator.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h1 class="calculator-title">Simple Calculator 2025</h1>
+        <input id="calculator-display" placeholder="..." readonly />
+
+        <div class="calculator-extra-operations">
+          <button onclick="root()" class="calculator-btn operation-btn">
+            &#8730;
+          </button>
+          <button onclick="sqr()" class="calculator-btn operation-btn">
+            x²
+          </button>
+          <button onclick="percent()" class="calculator-btn operation-btn">
+            %
+          </button>
+
+          <button onclick="backSpace()" class="calculator-btn operation-btn">
+            <
+          </button>
+
+          <button onclick="clearDisplay()" class="calculator-btn operation-btn">
+            C
+          </button>
+        </div>
+
+        <div class="calculator-main">
+          <div class="calculator-numbers">
+            <button onclick="appendToDisplay('7')" class="calculator-btn">
+              7</button
+            ><button onclick="appendToDisplay('8')" class="calculator-btn">
+              8</button
+            ><button onclick="appendToDisplay('9')" class="calculator-btn">
+              9
+            </button>
+            <button onclick="appendToDisplay('4')" class="calculator-btn">
+              4</button
+            ><button onclick="appendToDisplay('5')" class="calculator-btn">
+              5</button
+            ><button onclick="appendToDisplay('6')" class="calculator-btn">
+              6</button
+            ><button onclick="appendToDisplay('1')" class="calculator-btn">
+              1</button
+            ><button onclick="appendToDisplay('2')" class="calculator-btn">
+              2</button
+            ><button onclick="appendToDisplay('3')" class="calculator-btn">
+              3</button
+            ><button onclick="appendToDisplay('0')" class="calculator-btn">
+              0
+            </button>
+            <button onclick="appendToDisplay('.')" class="calculator-btn">
+              .
+            </button>
+          </div>
+
+          <div class="calculator-operations">
+            <button
+              onclick="appendToDisplay('+')"
+              class="calculator-btn operation-btn"
+            >
+              +
+            </button>
+
+            <button
+              onclick="appendToDisplay('-')"
+              class="calculator-btn operation-btn"
+            >
+              -
+            </button>
+
+            <button
+              onclick="appendToDisplay('*')"
+              class="calculator-btn operation-btn"
+            >
+              *
+            </button>
+
+            <button
+              onclick="appendToDisplay('/')"
+              class="calculator-btn operation-btn"
+            >
+              /
+            </button>
+
+            <button
+              onclick="calculate()"
+              class="calculator-btn operation-btn eql-btn"
+            >
+              =
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="assets/scripts/calculator.js"></script>
+  </body>
+</html>

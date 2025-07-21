@@ -1,0 +1,114 @@
+:root {
+  --color-bg: #29bdc1;
+  --color-white: #ffffff;
+  --color-text: #000000;
+  --color-primary: #007bff;
+  --color-primary-hover: #0160c5;
+  --color-operation: rgb(255, 119, 70);
+  --color-operation-hover: rgb(202, 92, 52);
+  --color-equal: rgb(255, 0, 0);
+  --color-equal-hover: rgb(201, 1, 1);
+  --color-border: black;
+}
+
+body,
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-bg);
+}
+
+.container {
+  padding: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background-color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.calculator-title {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+#calculator-display {
+  width: 95%;
+  height: 35px;
+  text-align: right;
+  padding: 10px;
+  font-size: 1.5rem;
+}
+
+.calculator-btn {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.calculator-btn:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.operation-btn {
+  background-color: var(--color-operation);
+}
+
+.operation-btn:hover {
+  background-color: var(--color-operation-hover);
+}
+
+.eql-btn {
+  background-color: var(--color-equal);
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+}
+
+.eql-btn:hover {
+  background-color: var(--color-equal-hover);
+}
+
+.calculator-main {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.calculator-numbers {
+  display: grid;
+  grid-template-columns: 60px 60px 60px;
+  gap: 5px;
+}
+
+.calculator-operations {
+  display: grid;
+  grid-template-columns: 60px 60px;
+  grid-template-rows: 60px 60px;
+  gap: 5px;
+}
+
+.calculator-extra-operations {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
