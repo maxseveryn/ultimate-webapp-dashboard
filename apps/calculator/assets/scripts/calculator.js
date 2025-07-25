@@ -35,9 +35,15 @@ function clearDisplay() {
   display.value = "";
 }
 
+math.config({
+  number: "BigNumber",
+  precision: 64,
+});
+
 function calculate() {
   try {
-    const result = Function(`"use strict"; return (${display.value})`)();
+    const expression = display.value;
+    const result = math.evaluate(expression);
     display.value = result;
   } catch (error) {
     display.value = "Error";
