@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodoro Timer</title>
+    <link rel="stylesheet" href="./assets/styles/reset.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="assets/icons/tomato.png" />
+    <link rel="stylesheet" href="./assets/styles/pomodoro-timer.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="timer-header hover-red">Pomodoro Timer</h1>
+      <hr />
+
+      <div class="circular-progress">
+        <div class="stem"></div>
+        <div class="leaf leaf-1"></div>
+        <div class="leaf leaf-2"></div>
+        <div class="leaf leaf-3"></div>
+
+        <svg class="progress-ring" width="200" height="200">
+          <circle
+            class="progress-ring-background"
+            stroke="#e6e6e6"
+            stroke-width="20"
+            fill="transparent"
+            r="90"
+            cx="100"
+            cy="100"
+          />
+
+          <circle
+            class="progress-ring-circle"
+            stroke="#ff4e4e"
+            stroke-width="20"
+            fill="transparent"
+            r="90"
+            cx="100"
+            cy="100"
+          />
+        </svg>
+
+        <p class="progress-value" id="timer"></p>
+      </div>
+
+      <div class="timer-buttons">
+        <button class="timer-btn" id="start"></button>
+        <button class="timer-btn" id="stop"></button>
+        <button class="timer-btn" id="reset"></button>
+      </div>
+
+      <div class="timer-modes-buttons">
+        <div class="mode-btn" id="pomodoro">Pomodoro Mode</div>
+        <div class="mode-btn" id="short-brake">Short Brake</div>
+        <div class="mode-btn" id="long-brake">Long Brake</div>
+      </div>
+    </div>
+
+    <script src="./assets/scripts/pomodoro-timer.js"></script>
+  </body>
+</html>

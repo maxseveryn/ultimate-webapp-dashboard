@@ -1,0 +1,230 @@
+:root {
+  --color-hr: #ffffff;
+  --color-container-bg: rgba(255, 255, 255, 0.2);
+  --color-btn-hover: #807f7f;
+  --color-tomato-green: #1f801f;
+}
+
+body,
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+}
+
+hr {
+  width: 100%;
+  height: 5px;
+  background-color: var(--color-hr);
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+    url(../images/background.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  backdrop-filter: blur(5px);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 15%;
+  height: 400px;
+  gap: 0.2em;
+
+  background-color: var(--color-container-bg);
+  border: 3px solid black;
+  border-radius: 2em;
+  padding: 3em;
+}
+
+.timer-header,
+.progress-value {
+  position: relative;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6), 0 0 8px #000000;
+  z-index: 3;
+  letter-spacing: 1.5px;
+  transition: color 0.3s ease;
+}
+
+.hover-red:hover {
+  color: #ff4d4d;
+}
+
+.hover-green:hover {
+  color: #4caf50;
+}
+
+.hover-blue:hover {
+  color: #2196f3;
+}
+
+.leaf {
+  width: 30px;
+  height: 90px;
+  border-radius: 45px 0;
+  background-color: var(--color-tomato-green);
+  position: absolute;
+
+  z-index: 1;
+}
+
+.stem {
+  width: 20px;
+  height: 70px;
+  border-radius: 0 20px;
+  background-color: var(--color-tomato-green);
+  position: absolute;
+
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%) rotate(30deg);
+  z-index: 2;
+}
+
+.leaf-1 {
+  top: -30px;
+  left: 30%;
+
+  transform: translateX(-50%) rotate(75deg);
+}
+
+.leaf-2 {
+  top: -25px;
+  left: 50%;
+
+  transform: translateX(50%) rotate(-250deg);
+}
+
+.leaf-3 {
+  top: -10px;
+  left: 25%;
+
+  transform: translateX(50%) rotate(35deg);
+}
+
+.circular-progress {
+  width: 200px;
+  height: 200px;
+  position: relative;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+.progress-ring__circle {
+  transition: stroke-dashoffset 0.5s linear;
+  transform-origin: 50% 50%;
+  stroke-linecap: round;
+}
+
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3rem;
+  color: #ff4e4e;
+}
+
+.timer-buttons {
+  margin: 2em 0;
+}
+
+.timer-modes-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.mode-btn {
+  text-align: center;
+  width: 100px;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 20px;
+  outline: none;
+  padding: 0.75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.mode-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.mode-btn:focus {
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+}
+
+.timer-btn {
+  width: 100px;
+  height: 50px;
+  cursor: pointer;
+
+  background-size: 50% auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 2em;
+  outline: none;
+
+  transition: background-color 0.5s ease;
+}
+
+.timer-btn:hover {
+  background-color: #858484;
+}
+
+.btn:hover {
+  background-color: var(--color-btn-hover);
+}
+
+#start {
+  background-image: url("../icons/play.png");
+}
+
+#stop {
+  background-image: url(../icons/stop.png);
+}
+
+#reset {
+  background-image: url(../icons/reset.png);
+}
