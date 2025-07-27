@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="icon" type="image/x-icon" href="assets/icons/meteorology.png" />
+    <link rel="stylesheet" href="assets/styles/reset.css" />
+    <link rel="stylesheet" href="assets/styles/weather.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main class="main-container">
+      <header class="header-container">
+        <h1 class="app-title">Weather App</h1>
+
+        <div class="header-buttons">
+          <div class="search-box">
+            <form autocomplete="off">
+              <input
+                class="search-input autocomplete"
+                type="text"
+                placeholder="Search"
+                id="search-input"
+              />
+            </form>
+
+            <button class="search-btn">
+              <i class="material-icons">search</i>
+            </button>
+          </div>
+
+          <button class="current-location-btn">
+            <p class="current-location-name">Current location</p>
+            <i class="material-icons">my_location</i>
+          </button>
+        </div>
+      </header>
+    </main>
+    <script src="config.js"></script>
+    <script type="module" src="assets/scripts/autocomplete.js"></script>
+    <script type="module" src="assets/scripts/weather.js"></script>
+  </body>
+</html>
