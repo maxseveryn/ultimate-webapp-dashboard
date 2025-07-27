@@ -13,60 +13,103 @@
     <link rel="stylesheet" href="./assets/styles/pomodoro-timer.css" />
   </head>
   <body>
-    <div class="container">
-      <h1 class="timer-header hover-red">Pomodoro Timer</h1>
-      <hr />
+    <main>
+      <div class="container">
+        <h1 class="timer-header hover-red">Pomodoro Timer</h1>
+        <hr />
 
-      <div class="circular-progress">
-        <div class="stem"></div>
-        <div class="leaf leaf-1"></div>
-        <div class="leaf leaf-2"></div>
-        <div class="leaf leaf-3"></div>
+        <div class="circular-progress">
+          <div class="stem"></div>
+          <div class="leaf leaf-1"></div>
+          <div class="leaf leaf-2"></div>
+          <div class="leaf leaf-3"></div>
 
-        <svg class="progress-ring" width="200" height="200">
-          <circle
-            class="progress-ring-background"
-            stroke="#e6e6e6"
-            stroke-width="20"
-            fill="transparent"
-            r="90"
-            cx="100"
-            cy="100"
-          />
+          <svg class="progress-ring" width="200" height="200">
+            <circle
+              class="progress-ring-background"
+              stroke="#e6e6e6"
+              stroke-width="20"
+              fill="transparent"
+              r="90"
+              cx="100"
+              cy="100"
+            />
 
-          <circle
-            class="progress-ring-circle"
-            stroke="#ff4e4e"
-            stroke-width="20"
-            fill="transparent"
-            r="90"
-            cx="100"
-            cy="100"
-          />
-        </svg>
+            <circle
+              class="progress-ring-circle"
+              stroke="#ff4e4e"
+              stroke-width="20"
+              fill="transparent"
+              r="90"
+              cx="100"
+              cy="100"
+            />
+          </svg>
 
-        <p class="progress-value" id="timer"></p>
+          <p
+            class="progress-value"
+            id="timer"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </div>
+
+        <div class="timer-buttons">
+          <button
+            class="timer-btn start"
+            id="start"
+            aria-label="Start timer"
+          ></button>
+          <button
+            class="timer-btn stop"
+            id="stop"
+            aria-label="Stop timer"
+          ></button>
+          <button
+            class="timer-btn reset"
+            id="reset"
+            aria-label="Reset timer"
+          ></button>
+        </div>
+
+        <div class="timer-modes-buttons">
+          <button
+            class="mode-btn"
+            id="pomodoro"
+            aria-label="Start work session"
+          >
+            Work Time
+          </button>
+          <button
+            class="mode-btn"
+            id="short-brake"
+            aria-label="Start short brake"
+          >
+            Short Brake
+          </button>
+          <button
+            class="mode-btn"
+            id="long-brake"
+            aria-label="Start long break"
+          >
+            Long Brake
+          </button>
+        </div>
+
+        <div class="work-cycle-buttons">
+          <button class="mode-btn cycle-btn" id="work-cycle">
+            Focus Cycle
+          </button>
+          <button
+            class="timer-btn auto-play-btn"
+            id="auto-cycle"
+            aria-pressed="false"
+          ></button>
+        </div>
+
+        <p class="total-pomodoro-cycles">Total Pomodoro Cycles: 0</p>
       </div>
-
-      <div class="timer-buttons">
-        <button class="timer-btn start" id="start"></button>
-        <button class="timer-btn stop" id="stop"></button>
-        <button class="timer-btn reset" id="reset"></button>
-      </div>
-
-      <div class="timer-modes-buttons">
-        <button class="mode-btn" id="pomodoro">Work Time</button>
-        <button class="mode-btn" id="short-brake">Short Brake</button>
-        <button class="mode-btn" id="long-brake">Long Brake</button>
-      </div>
-
-      <div class="work-cycle-buttons">
-        <button class="mode-btn cycle-btn" id="work-cycle">Focus Cycle</button>
-        <button class="timer-btn auto-play-btn" id="auto-cycle"></button>
-      </div>
-
-      <p class="total-pomodoro-cycles">Total Pomodoro Cycles: 0</p>
-    </div>
+    </main>
 
     <script src="./assets/scripts/pomodoro-timer.js"></script>
   </body>

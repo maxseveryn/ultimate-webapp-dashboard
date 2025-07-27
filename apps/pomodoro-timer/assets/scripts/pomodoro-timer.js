@@ -226,11 +226,11 @@ workCycleBtn.addEventListener("click", () => {
 
 autoPlayBtn.addEventListener("click", () => {
   cycleAutoPlay = !cycleAutoPlay;
-  if (cycleAutoPlay) {
-    autoPlayBtn.classList.add("active");
-  } else {
-    autoPlayBtn.classList.remove("active");
-  }
+  autoPlayBtn.setAttribute("aria-pressed", cycleAutoPlay ? "true" : "false");
+
+  cycleAutoPlay
+    ? autoPlayBtn.classList.add("active")
+    : autoPlayBtn.classList.remove("active");
 });
 
 pomodoroBtn.addEventListener("mouseenter", () => {

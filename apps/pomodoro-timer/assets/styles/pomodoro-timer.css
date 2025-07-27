@@ -142,6 +142,7 @@ body {
 }
 
 .timer-buttons {
+  user-select: none;
   margin: 2em 0;
 }
 
@@ -271,6 +272,11 @@ body {
 
 .hover-blue:hover {
   color: var(--color-tomato-blue);
+}
+
+button:focus {
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.6);
+  border-radius: 6px;
 }
 
 @media (max-width: 500px) {
