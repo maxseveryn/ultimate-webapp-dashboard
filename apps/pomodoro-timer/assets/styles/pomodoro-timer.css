@@ -1,8 +1,12 @@
 :root {
   --color-hr: #ffffff;
   --color-container-bg: rgba(255, 255, 255, 0.2);
-  --color-btn-hover: #807f7f;
-  --color-tomato-green: #1f801f;
+
+  --color-tomato-red: #ff4d4d;
+  --color-tomato-green: #4caf50;
+  --color-tomato-blue: #2196f3;
+
+  --color-tomato-leafs: #1f801f;
 }
 
 body,
@@ -40,7 +44,7 @@ body {
   justify-content: center;
   align-items: center;
   min-width: 15%;
-  height: 400px;
+  height: 500px;
   gap: 0.2em;
 
   background-color: var(--color-container-bg);
@@ -50,7 +54,8 @@ body {
 }
 
 .timer-header,
-.progress-value {
+.progress-value,
+.total-pomodoro-cycles {
   position: relative;
   font-size: 2.5rem;
   font-weight: 700;
@@ -62,23 +67,16 @@ body {
   transition: color 0.3s ease;
 }
 
-.hover-red:hover {
-  color: #ff4d4d;
-}
-
-.hover-green:hover {
-  color: #4caf50;
-}
-
-.hover-blue:hover {
-  color: #2196f3;
+.total-pomodoro-cycles {
+  margin-top: 1em;
+  font-size: 1rem;
 }
 
 .leaf {
   width: 30px;
   height: 90px;
   border-radius: 45px 0;
-  background-color: var(--color-tomato-green);
+  background-color: var(--color-tomato-leafs);
   position: absolute;
 
   z-index: 1;
@@ -88,7 +86,7 @@ body {
   width: 20px;
   height: 70px;
   border-radius: 0 20px;
-  background-color: var(--color-tomato-green);
+  background-color: var(--color-tomato-leafs);
   position: absolute;
 
   top: -50px;
@@ -140,17 +138,23 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 3rem;
-  color: #ff4e4e;
+  color: var(--color-tomato-red);
 }
 
 .timer-buttons {
   margin: 2em 0;
 }
 
+.work-cycle-buttons {
+  width: 100%;
+  display: flex;
+  gap: 5px;
+}
+
 .timer-modes-buttons {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 8px;
 }
 
 .mode-btn {
@@ -183,6 +187,15 @@ body {
   touch-action: manipulation;
 }
 
+.cycle-btn {
+  width: 100%;
+}
+
+.cycle-btn.active {
+  border: 4px solid;
+  border-color: var(--color-tomato-red);
+}
+
 .mode-btn:hover {
   box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
@@ -201,30 +214,68 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: transparent;
-  border: 2px solid black;
-  border-radius: 10px;
   padding: 2em;
   outline: none;
+  border: none;
 
-  transition: background-color 0.5s ease;
-}
-
-.timer-btn:hover {
-  background-color: #858484;
+  transition: background-image 0.5s ease;
 }
 
 .btn:hover {
   background-color: var(--color-btn-hover);
 }
 
-#start {
+.start {
   background-image: url("../icons/play.png");
 }
 
-#stop {
+.stop {
   background-image: url(../icons/stop.png);
 }
 
-#reset {
+.reset {
   background-image: url(../icons/reset.png);
+}
+
+.auto-play-btn {
+  background-image: url(../icons/autoplay.png);
+}
+
+.start:hover {
+  background-image: url("../icons/play_hover.png");
+}
+
+.stop:hover {
+  background-image: url("../icons/stop_hover.png");
+}
+
+.reset:hover {
+  background-image: url("../icons/reset_hover.png");
+}
+
+.auto-play-btn:hover {
+  background-image: url("../icons/autoplay_hover.png");
+}
+
+.auto-play-btn.active {
+  background-image: url("../icons/autoplay_active.png");
+}
+
+.hover-red:hover {
+  color: var(--color-tomato-red);
+}
+
+.hover-green:hover {
+  color: var(--color-tomato-green);
+}
+
+.hover-blue:hover {
+  color: var(--color-tomato-blue);
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 1em;
+    height: 600px;
+  }
 }

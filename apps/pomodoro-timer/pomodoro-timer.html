@@ -49,16 +49,23 @@
       </div>
 
       <div class="timer-buttons">
-        <button class="timer-btn" id="start"></button>
-        <button class="timer-btn" id="stop"></button>
-        <button class="timer-btn" id="reset"></button>
+        <button class="timer-btn start" id="start"></button>
+        <button class="timer-btn stop" id="stop"></button>
+        <button class="timer-btn reset" id="reset"></button>
       </div>
 
       <div class="timer-modes-buttons">
-        <div class="mode-btn" id="pomodoro">Pomodoro Mode</div>
-        <div class="mode-btn" id="short-brake">Short Brake</div>
-        <div class="mode-btn" id="long-brake">Long Brake</div>
+        <button class="mode-btn" id="pomodoro">Work Time</button>
+        <button class="mode-btn" id="short-brake">Short Brake</button>
+        <button class="mode-btn" id="long-brake">Long Brake</button>
       </div>
+
+      <div class="work-cycle-buttons">
+        <button class="mode-btn cycle-btn" id="work-cycle">Focus Cycle</button>
+        <button class="timer-btn auto-play-btn" id="auto-cycle"></button>
+      </div>
+
+      <p class="total-pomodoro-cycles">Total Pomodoro Cycles: 0</p>
     </div>
 
     <script src="./assets/scripts/pomodoro-timer.js"></script>

@@ -6,11 +6,16 @@ const pomodoroBtn = document.getElementById("pomodoro");
 const shortBrakeBtn = document.getElementById("short-brake");
 const longBrakeBtn = document.getElementById("long-brake");
 
+const workCycleBtn = document.getElementById("work-cycle");
+const autoPlayBtn = document.getElementById("auto-cycle");
+
 const timerHeader = document.querySelector(".timer-header");
+const totalCyclesText = document.querySelector(".total-pomodoro-cycles");
 
 const pomodoroBtnText = pomodoroBtn.innerText;
 const shortBrakeBtnText = shortBrakeBtn.innerText;
 const longBrakeBtnText = longBrakeBtn.innerText;
+const workCycleBtnText = workCycleBtn.innerText;
 
 const timer = document.getElementById("timer");
 
@@ -27,22 +32,37 @@ function setProgress(percent) {
 }
 
 const timeUp = new Audio("assets/sounds/time-up.mp3");
-timeUp.volume = 0.2;
+timeUp.volume = 0.1;
 
-let startTime = 1500;
+const shortBreakDuration = 300;
+const longBreakDuration = 900;
+const workDuration = 1500;
+
+let startTime = workDuration;
 let timeLeft = startTime;
 let interval;
+
+let pomodoroCycleCount = 0;
+let cycleAutoPlay = false;
+let isCycleRunning = false;
+let timerCompleteCallback = null;
 
 let timerMode = "work";
 
 let timerColor;
 
+let totalCycles = 0;
+
 const updateTimer = () => {
   const minutes = Math.floor(timeLeft / 60);
   const seconds = timeLeft % 60;
-  timer.innerHTML = `${minutes.toString().padStart(2, "0")}:${seconds
+  const formated = `${minutes.toString().padStart(2, "0")}:${seconds
     .toString()
     .padStart(2, "0")}`;
+
+  timer.innerHTML = formated;
+
+  document.title = `${formated} | ${getModeLabel(timerMode)}`;
 
   const percent = ((startTime - timeLeft) / startTime) * 100;
   setProgress(percent);
@@ -52,6 +72,7 @@ const startTimer = () => {
   stopBtn.disabled = false;
   timer.style.color = timerColor;
   clearInterval(interval);
+
   interval = setInterval(() => {
     timeLeft--;
     updateTimer();
@@ -59,9 +80,13 @@ const startTimer = () => {
     if (timeLeft === 0) {
       clearInterval(interval);
       playSound();
-      alert("Time's up!");
-      timeLeft = startTime;
-      updateTimer();
+
+      if (typeof timerCompleteCallback === "function") {
+        timerCompleteCallback();
+      } else {
+        timeLeft = startTime;
+        updateTimer();
+      }
     }
   }, 1000);
 };
@@ -89,6 +114,48 @@ function playSound() {
 function setTimer(time) {
   startTime = time;
   timeLeft = startTime;
+}
+
+function workCycle() {
+  workCycleBtn.classList.add("active");
+  pomodoroCycleCount = 0;
+  isCycleRunning = true;
+  timerCompleteCallback = () => {
+    runNextCycleStep();
+  };
+  switchMode("work", workDuration);
+  startTimer();
+}
+
+function runNextCycleStep() {
+  if (!isCycleRunning) {
+    return;
+  }
+
+  if (timerMode === "work") {
+    pomodoroCycleCount++;
+
+    if (pomodoroCycleCount % 4 === 0) {
+      switchMode("long", longBreakDuration);
+      if (!cycleAutoPlay) {
+        isCycleRunning = false;
+      }
+      workCycleBtn.classList.remove("active");
+      totalCycles++;
+      localStorage.setItem("totalPomodoroCycles", totalCycles);
+      totalCyclesText.innerHTML = `Total Pomodoro Cycles: ${totalCycles}`;
+    } else {
+      switchMode("short", shortBreakDuration);
+    }
+  } else {
+    switchMode("work", workDuration);
+  }
+
+  startTimer();
+
+  timerCompleteCallback = () => {
+    runNextCycleStep();
+  };
 }
 
 function updateTimerColor(timerMode) {
@@ -124,13 +191,47 @@ function switchMode(mode, time) {
   updateTimerColor(timerMode);
 }
 
+function getModeLabel(mode) {
+  switch (mode) {
+    case "work":
+      return "Work";
+    case "short":
+      return "Short Brake";
+    case "long":
+      return "Long Brake";
+    default:
+      return "Pomodoro Timer";
+  }
+}
+
 startBtn.addEventListener("click", startTimer);
 stopBtn.addEventListener("click", stopTimer);
-resetBtn.addEventListener("click", resetTimer);
+resetBtn.addEventListener("click", () => {
+  isCycleRunning = false;
+  switchMode("work", workDuration);
+  resetTimer();
+});
 
-pomodoroBtn.addEventListener("click", () => switchMode("work", 1500));
-shortBrakeBtn.addEventListener("click", () => switchMode("short", 300));
-longBrakeBtn.addEventListener("click", () => switchMode("long", 900));
+pomodoroBtn.addEventListener("click", () => switchMode("work", workDuration));
+shortBrakeBtn.addEventListener("click", () =>
+  switchMode("short", shortBreakDuration)
+);
+longBrakeBtn.addEventListener("click", () =>
+  switchMode("long", longBreakDuration)
+);
+
+workCycleBtn.addEventListener("click", () => {
+  workCycle();
+});
+
+autoPlayBtn.addEventListener("click", () => {
+  cycleAutoPlay = !cycleAutoPlay;
+  if (cycleAutoPlay) {
+    autoPlayBtn.classList.add("active");
+  } else {
+    autoPlayBtn.classList.remove("active");
+  }
+});
 
 pomodoroBtn.addEventListener("mouseenter", () => {
   pomodoroBtn.innerText = "25:00";
@@ -156,4 +257,17 @@ longBrakeBtn.addEventListener("mouseleave", () => {
   longBrakeBtn.innerText = longBrakeBtnText;
 });
 
+workCycleBtn.addEventListener("mouseenter", () => {
+  workCycleBtn.innerText = "(25 m + 5 m)*4 + 15 m";
+});
+
+workCycleBtn.addEventListener("mouseleave", () => {
+  workCycleBtn.innerText = workCycleBtnText;
+});
+
+const savedTotal = localStorage.getItem("totalPomodoroCycles");
+if (savedTotal !== null) {
+  totalCycles = Number(savedTotal);
+  totalCyclesText.innerHTML = `Total Pomodoro Cycles: ${totalCycles}`;
+}
 updateTimer();
