@@ -3,6 +3,38 @@ import { getLocation } from "./current-location.js";
 const currentLocationBtn = document.querySelector(".current-location-btn");
 const searchInput = document.getElementById("search-input");
 
+const units = "metric";
+const apiKey = API_CONFIG.OPENWEATHER_KEY;
+
+const currentTemperature = document.querySelector(".current-temperature");
+const currentFeels = document.querySelector(".current-feels");
+const description = document.querySelector(".current-status");
+const currentWeatherIcon = document.querySelector(".current-weather-icon");
+const currentDate = document.querySelector(".current-date-value");
+const currentLocation = document.querySelector(".current-location-value");
+
+const forecastTemperature = document.querySelectorAll(".forecast-temperature");
+const forecastWeatherIcon = document.querySelectorAll(".forecast-weather-icon");
+const forecastDate = document.querySelectorAll(".forecast-date");
+const forecastDay = document.querySelectorAll(".forecast-day");
+
+const searchBtn = document.querySelector(".search-btn");
+
+const date = new Date();
+
+const options = {
+  weekday: "long",
+  day: "numeric",
+  month: "short",
+};
+
+const formattedDate = new Intl.DateTimeFormat("en-US", options).format(date);
+
+const hours = date.getHours().toString().padStart(2, "0");
+const minutes = date.getMinutes().toString().padStart(2, "0");
+
+const currentMoment = `${formattedDate}, ${hours}:${minutes}`;
+
 currentLocationBtn.addEventListener("click", async () => {
   try {
     const result = await getLocation();
@@ -12,3 +44,89 @@ currentLocationBtn.addEventListener("click", async () => {
     searchInput.value = "Location error";
   }
 });
+
+searchBtn.addEventListener("click", () => {
+  const city = document.getElementById("search-input").value;
+  if (city) {
+    fetchWeather(city);
+  } else {
+    alert("Input correct city name!");
+    return;
+  }
+});
+
+async function fetchWeather(city) {
+  try {
+    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+    const forecastWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`;
+
+    const currentWeatherResponse = await fetch(currentWeatherUrl);
+    const forecastWeatherResponse = await fetch(forecastWeatherUrl);
+
+    const currentWeatherData = await currentWeatherResponse.json();
+    const forecastWeatherData = await forecastWeatherResponse.json();
+
+    if (currentWeatherData.cod == "400" || currentWeatherData.cod == "404") {
+      alert("Not a valid city");
+      return;
+    }
+
+    displayWeather(currentWeatherData);
+    displayForecast(forecastWeatherData);
+  } catch (error) {
+    console.error("Error getting data", error);
+  }
+}
+
+function displayWeather(data) {
+  const city = data.name;
+  const country = data.sys.country;
+  const temperatureReal = Math.round(data.main.temp);
+  const temperatureFeelsLike = Math.round(data.main.feels_like);
+  const descriptionStatus = data.weather[0].description;
+  const icon = data.weather[0].icon;
+
+  // const humidity = data.main.humidity;
+  // const windSpeed = data.wind.speed;
+
+  currentLocation.textContent = city + ", " + country;
+  description.textContent = descriptionStatus;
+  currentTemperature.textContent = `${temperatureReal}°C`;
+  currentFeels.textContent = `Feels like: ${temperatureFeelsLike}°C`;
+  currentDate.textContent = currentMoment;
+
+  const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+  currentWeatherIcon.src = iconUrl;
+}
+
+function displayForecast(data) {
+  let dayIndex = 0;
+
+  for (let i = 7; i < data.list.length && dayIndex < 5; i += 8) {
+    const item = data.list[i];
+    const dateObj = new Date(item.dt_txt);
+
+    const temperature = `${Math.round(item.main.temp)}°C`;
+    const iconCode = item.weather[0].icon;
+    const description = item.weather[0].description;
+    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
+
+    const dayName = dateObj.toLocaleDateString("en-US", { weekday: "long" });
+    const dateText = dateObj.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+    });
+
+    if (forecastTemperature[dayIndex])
+      forecastTemperature[dayIndex].textContent = temperature;
+    if (forecastWeatherIcon[dayIndex]) {
+      forecastWeatherIcon[dayIndex].src = iconUrl;
+      forecastWeatherIcon[dayIndex].alt = description;
+    }
+    if (forecastDate[dayIndex]) forecastDate[dayIndex].textContent = dateText;
+    if (forecastDay[dayIndex])
+      forecastDay[dayIndex].textContent = `${dayName}, `;
+
+    dayIndex++;
+  }
+}
