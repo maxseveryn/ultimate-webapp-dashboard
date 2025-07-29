@@ -18,6 +18,19 @@ const forecastWeatherIcon = document.querySelectorAll(".forecast-weather-icon");
 const forecastDate = document.querySelectorAll(".forecast-date");
 const forecastDay = document.querySelectorAll(".forecast-day");
 
+const windSpeed = document.querySelector(".wind-speed");
+const windDeg = document.querySelector(".wind-deg");
+const windGust = document.querySelector(".wind-gust");
+
+const sunset = document.querySelector(".sunset");
+const sunrise = document.querySelector(".sunrise");
+
+const humidity = document.querySelector(".humidity");
+const pressure = document.querySelector(".pressure");
+const visibility = document.querySelector(".visibility");
+
+const container = document.querySelector(".today-at-scroll-container");
+
 const searchBtn = document.querySelector(".search-btn");
 
 const date = new Date();
@@ -73,6 +86,7 @@ async function fetchWeather(city) {
 
     displayWeather(currentWeatherData);
     displayForecast(forecastWeatherData);
+    displayHourly(forecastWeatherData);
   } catch (error) {
     console.error("Error getting data", error);
   }
@@ -86,8 +100,25 @@ function displayWeather(data) {
   const descriptionStatus = data.weather[0].description;
   const icon = data.weather[0].icon;
 
-  // const humidity = data.main.humidity;
-  // const windSpeed = data.wind.speed;
+  const windSpeedValue = data.wind.speed;
+  const windDegValue = data.wind.deg;
+  const windGustValue = data.wind.gust;
+
+  const sunriseDate = new Date(data.sys.sunrise * 1000);
+  const sunsetDate = new Date(data.sys.sunset * 1000);
+
+  const sunriseTime = sunriseDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const sunsetTime = sunsetDate.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const humidityValue = data.main.humidity;
+  const pressureValue = data.main.pressure;
+  const visibilityValue = data.visibility / 1000;
 
   currentLocation.textContent = city + ", " + country;
   description.textContent = descriptionStatus;
@@ -97,6 +128,17 @@ function displayWeather(data) {
 
   const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`;
   currentWeatherIcon.src = iconUrl;
+
+  windSpeed.textContent = `${windSpeedValue} m/s`;
+  windDeg.textContent = `${windDegValue}°`;
+  windGust.textContent = `${windGustValue} m/s`;
+
+  sunrise.textContent = sunriseTime;
+  sunset.textContent = sunsetTime;
+
+  humidity.textContent = `${humidityValue}%`;
+  pressure.textContent = `${pressureValue} hPa`;
+  visibility.textContent = `${visibilityValue} km`;
 }
 
 function displayForecast(data) {
@@ -129,4 +171,29 @@ function displayForecast(data) {
 
     dayIndex++;
   }
+}
+
+function displayHourly(data) {
+  const hourlyList = data.list.slice(0, 8);
+
+  hourlyList.forEach((item) => {
+    const time = new Date(item.dt * 1000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    const icon = item.weather[0].icon;
+    const temp = Math.round(item.main.temp);
+
+    const block = document.createElement("div");
+    block.classList.add("today-at-item", "info-block");
+
+    block.innerHTML = `
+      <p class="today-at-time">${time}</p>
+      <img class="today-at-icon info-icon" src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="icon">
+      <p class="today-at-temperature">${temp}°C</p>
+    `;
+
+    container.appendChild(block);
+  });
 }

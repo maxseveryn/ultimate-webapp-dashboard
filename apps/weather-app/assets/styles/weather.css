@@ -286,14 +286,13 @@ hr {
 }
 
 .wind-info {
-  grid-column: span 2 / span 2;
-  grid-row: span 2 / span 2;
+  grid-column: span 3 / span 3;
+  grid-row: span 1 / span 1;
 }
 
 .sunset-sunrise-info {
-  grid-row: span 2 / span 2;
-  grid-column-start: 3;
-  grid-row-start: 1;
+  grid-column: span 3 / span 3;
+  grid-row: span 1 / span 1;
 }
 
 .humidity-info {
@@ -315,6 +314,52 @@ hr {
   background-color: var(--color-main-hover);
 }
 
+.info-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.details-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.wind-div {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.wind-details-container,
+.sunset-sunrise-container {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.sunset-sunrise-container {
+  justify-content: center;
+}
+
+.sunset-sunrise-item {
+  margin: 0 30px;
+}
+
+.wind-item-title {
+  margin-bottom: 20px;
+}
+
+.highligths-info,
+.today-at-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 /* End Todays Highlights Block */
 
 /* Start Today At Block */
@@ -332,7 +377,8 @@ hr {
   overflow-x: auto;
   gap: 1rem;
 
-  overflow: hidden;
+  height: 200px;
+
   scrollbar-width: thin;
 }
 
@@ -340,10 +386,10 @@ hr {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex: 0 0 auto;
-  height: 90px;
+  height: 120px;
   width: 100px;
-  padding: 10px;
 }
 
 .today-at-icon {
