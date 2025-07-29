@@ -32,12 +32,12 @@
               />
             </form>
 
-            <button class="search-btn">
+            <button class="search-btn" aria-label="Search">
               <i class="material-icons">search</i>
             </button>
           </div>
 
-          <button class="current-location-btn">
+          <button class="current-location-btn" aria-label="Current Location">
             <p class="current-location-name">Current location</p>
             <i class="material-icons">my_location</i>
           </button>
@@ -48,15 +48,15 @@
         <section class="current-weather content-block">
           <h3>Now</h3>
           <div class="current-row">
-            <p class="current-temperature">14°C</p>
+            <p class="current-temperature">t°C</p>
             <img
               src="https://openweathermap.org/img/wn/10n@2x.png"
               class="current-weather-icon"
               alt="weather icon"
             />
           </div>
-          <p class="current-feels">test</p>
-          <p class="current-status">Clear Sky</p>
+          <p class="current-feels">Feels like</p>
+          <p class="current-status">test status</p>
           <hr />
           <div class="current-date-row">
             <img class="current-icon" src="./assets/icons/calendar.svg" />
@@ -93,7 +93,6 @@
             </div>
             <div class="sunset-sunrise-info info-block">
               <p>Sunset & Sunrise</p>
-              <div class="sunset-sunrise-div"></div>
               <div class="sunset-sunrise-container">
                 <img class="info-icon" src="./assets/icons/sun.svg" />
                 <div class="sunset-sunrise-item">
@@ -127,7 +126,7 @@
         <section class="forecast content-block">
           <h3 class="block-title">5 Days Forecast</h3>
 
-          <div class="forecast-row">
+          <article class="forecast-row">
             <div class="forecast-temperature-div">
               <p class="forecast-temperature">14°C</p>
               <img
@@ -139,8 +138,8 @@
               <p class="forecast-day">Tuesday,</p>
               <p class="forecast-date">Jul 29</p>
             </div>
-          </div>
-          <div class="forecast-row">
+          </article>
+          <article class="forecast-row">
             <div class="forecast-temperature-div">
               <p class="forecast-temperature">14°C</p>
               <img
@@ -152,8 +151,8 @@
               <p class="forecast-day">Tuesday,</p>
               <p class="forecast-date">Jul 29</p>
             </div>
-          </div>
-          <div class="forecast-row">
+          </article>
+          <article class="forecast-row">
             <div class="forecast-temperature-div">
               <p class="forecast-temperature">14°C</p>
               <img
@@ -165,8 +164,8 @@
               <p class="forecast-day">Tuesday,</p>
               <p class="forecast-date">Jul 29</p>
             </div>
-          </div>
-          <div class="forecast-row">
+          </article>
+          <article class="forecast-row">
             <div class="forecast-temperature-div">
               <p class="forecast-temperature">14°C</p>
               <img
@@ -178,8 +177,8 @@
               <p class="forecast-day">Tuesday,</p>
               <p class="forecast-date">Jul 29</p>
             </div>
-          </div>
-          <div class="forecast-row">
+          </article>
+          <article class="forecast-row">
             <div class="forecast-temperature-div">
               <p class="forecast-temperature">14°C</p>
               <img
@@ -191,7 +190,7 @@
               <p class="forecast-day">Tuesday,</p>
               <p class="forecast-date">Jul 29</p>
             </div>
-          </div>
+          </article>
         </section>
         <section class="today-at content-block">
           <div class="today-at-scroll-container"></div>

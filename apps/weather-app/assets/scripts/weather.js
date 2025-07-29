@@ -59,13 +59,26 @@ currentLocationBtn.addEventListener("click", async () => {
 });
 
 searchBtn.addEventListener("click", () => {
-  const city = document.getElementById("search-input").value;
+  const city = searchInput.value.trim();
   if (city) {
+    localStorage.setItem("lastCity", city);
     fetchWeather(city);
   } else {
     alert("Input correct city name!");
     return;
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const lastCity = localStorage.getItem("lastCity");
+  if (lastCity) {
+    fetchWeather(lastCity);
+  }
+});
+
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  searchBtn.click();
 });
 
 async function fetchWeather(city) {
@@ -74,7 +87,10 @@ async function fetchWeather(city) {
     const forecastWeatherUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`;
 
     const currentWeatherResponse = await fetch(currentWeatherUrl);
+    if (!currentWeatherResponse.ok)
+      throw new Error("Current weather fetch failed");
     const forecastWeatherResponse = await fetch(forecastWeatherUrl);
+    if (!forecastWeatherResponse.ok) throw new Error("Forecast fetch failed");
 
     const currentWeatherData = await currentWeatherResponse.json();
     const forecastWeatherData = await forecastWeatherResponse.json();
@@ -144,6 +160,11 @@ function displayWeather(data) {
 function displayForecast(data) {
   let dayIndex = 0;
 
+  if (!data.list || data.list.length === 0) {
+    renderError("No forecast data available.");
+    return;
+  }
+
   for (let i = 7; i < data.list.length && dayIndex < 5; i += 8) {
     const item = data.list[i];
     const dateObj = new Date(item.dt_txt);
@@ -174,6 +195,13 @@ function displayForecast(data) {
 }
 
 function displayHourly(data) {
+  container.innerHTML = "";
+
+  if (!data.list || data.list.length === 0) {
+    renderError("No forecast data available.");
+    return;
+  }
+
   const hourlyList = data.list.slice(0, 8);
 
   hourlyList.forEach((item) => {
